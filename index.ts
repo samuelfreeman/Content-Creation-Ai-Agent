@@ -7,10 +7,34 @@ import express from 'express'
 // import zod for schema validation
 import zod from 'zod'
 
+import { Ollama } from "ollama";
+import { configDotenv } from "dotenv";
+configDotenv();
+const ollama = new Ollama({});
+
 const server = new McpServer({
     name: "Content creation",
     version: "1.0.0"
 })
+
+const gettingStarted = async () => {
+  try {
+    const response = await ollama.chat({
+      model: "gpt-oss:120b-cloud",
+      messages: [{ role: "user", content: "Hello Ollama" }],
+      stream: true,
+    });
+
+    for await (const part of response) {
+      process.stdout.write(part.message.content);
+    }
+  } catch (error) {
+    console.log("Error:", error);
+  }
+};
+
+gettingStarted();
+
 
 
 const app = express();
