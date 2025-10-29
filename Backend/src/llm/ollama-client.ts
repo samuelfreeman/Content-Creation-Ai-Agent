@@ -6,13 +6,14 @@ const ollama = new Ollama({});
 
 export const chatModel = async (prompt: string) => {
     try {
+        console.log("Prompt:", prompt);
         const response = await ollama.chat({
-            model: process.env.OLLAMA_MODEL,
+            model:  "gpt-oss:120b-cloud",
             messages: [{ role: "user", content: prompt }],
             // commented out the stream for stream purposes
             // stream: true,
         });
-
+        console.log(response)
         return response.message.content
         // for await (const part of response) {
         //     process.stdout.write(part.message.content);
