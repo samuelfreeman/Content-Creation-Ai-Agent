@@ -16,7 +16,7 @@ export default function SplashScreen() {
   const [showSlogan, setShowSlogan] = useState(false);
 
   return (
-    <main className="flex flex-col items-center justify-center h-screen bg-white text-gray-900">
+    <main className="flex-1 flex flex-col h-screen items-center justify-center bg-white text-gray-900">
       {/* Typewriter animation for "Promptly" */}
       <motion.h1
         initial={{ opacity: 0 }}
@@ -47,7 +47,7 @@ export default function SplashScreen() {
           transition={{ delay: 0.3, duration: 1 }}
           className="mt-6 text-lg md:text-xl text-gray-700 text-center max-w-md"
         >
-          Generate ready-to-publish blog posts in seconds.
+          Generate ready-to-publish content in seconds.
         </motion.p>
       )}
 
@@ -60,7 +60,7 @@ export default function SplashScreen() {
         >
           <Link href="/generate">
             <button className="mt-10 px-6 py-3 text-white rounded-full bg-gray-900 hover:bg-gray-700 transition-all duration-200 text-lg font-medium shadow-lg">
-              Generate a Blog
+              Generate a Content
             </button>
           </Link>
         </motion.div>
