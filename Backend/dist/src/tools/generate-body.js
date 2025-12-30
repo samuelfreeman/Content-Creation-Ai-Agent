@@ -1,5 +1,5 @@
 import { chatModel } from "../llm/ollama-client.js";
-export const generateBody = async (topic, sectionCount) => {
+export const generateBody = async (topic, sectionCount = 3) => {
     if (sectionCount && sectionCount !== 0) {
         const prompt = `
 Write the main body of a blog post about: ${topic}

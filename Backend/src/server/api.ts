@@ -14,13 +14,8 @@ const prisma = new PrismaClient({ adapter })
 app.use(cors());
 app.use(express.json());
 
-<<<<<<< HEAD
-app.post("/server", async (req, res) => {
-    const { task, content ,value} = req.body;
-=======
 app.post("/agent", async (req, res, next) => {
     const { task, content, value } = req.body;
->>>>>>> upstream/main
     try {
         const result = await handleUserTask(task, content, value);
         console.log(result)

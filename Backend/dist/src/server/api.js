@@ -10,11 +10,7 @@ const adapter = new PrismaMariaDb(process.env.DATABASE_URL);
 const prisma = new PrismaClient({ adapter });
 app.use(cors());
 app.use(express.json());
-<<<<<<< HEAD
-app.post("/server", async (req, res) => {
-=======
 app.post("/agent", async (req, res, next) => {
->>>>>>> upstream/main
     const { task, content, value } = req.body;
     try {
         const result = await handleUserTask(task, content, value);

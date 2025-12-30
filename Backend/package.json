@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "debug": "tsx src/main.ts",
-    "start": "node dist/index.js"
+    "start": "node dist/src/main.js"
   },
   "author": "",
   "license": "ISC",
@@ -23,12 +23,8 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
-<<<<<<< HEAD
-    "ollama": "^0.6.3",
-=======
     "jsonwebtoken": "^9.0.3",
-    "ollama": "^0.6.0",
->>>>>>> upstream/main
+    "ollama": "^0.6.3",
     "ts-node": "^10.9.2",
     "tsx": "^4.20.6",
     "zod": "^3.25.76"
