@@ -6,7 +6,7 @@ import { PrismaClient } from "../generated/prisma/client.js";
 const app = express();
 import { PrismaMariaDb } from '@prisma/adapter-mariadb'
 import jwt from "jsonwebtoken"
-
+import userRouter from "./routes/User.routes.js";
 
 const adapter = new PrismaMariaDb(process.env.DATABASE_URL);
 const prisma = new PrismaClient({ adapter })
@@ -25,33 +25,35 @@ app.post("/agent", async (req, res, next) => {
     }
 });
 
-app.post("/signup", async (req, res, next) => {
-    const data = req.body;
 
-    const hashedPassword = await bycrpt.hash(data.password, 15)
-    data.password = hashedPassword
-    // stored body in database
-    try {
-        const userAlreadyExist = await prisma.user.findUnique({
-            where: {
-                email: data.email
-            }
-        })
-        if (userAlreadyExist) throw new Error("Email already exist! Please login")
-        const result = await prisma.user.create({ data });
-        const token = jwt.sign(result.id, process.env.JWT_SECRET);
-        delete result.password
-        res.status(201).json({
-            message: "User created successfully",
-            result,
-            token
-        })
-        next()
-    } catch (error) {
-        console.error(error)
-        res.status(500).json({ error: error.message })
-    }
-})
+app.use(userRouter)
+// app.post("/signup", async (req, res, next) => {
+//     const data = req.body;
+
+//     const hashedPassword = await bycrpt.hash(data.password, 15)
+//     data.password = hashedPassword
+//     // stored body in database
+//     try {
+//         const userAlreadyExist = await prisma.user.findUnique({
+//             where: {
+//                 email: data.email
+//             }
+//         })
+//         if (userAlreadyExist) throw new Error("Email already exist! Please login")
+//         const result = await prisma.user.create({ data });
+//         const token = jwt.sign(result.id, process.env.JWT_SECRET);
+//         delete result.password
+//         res.status(201).json({
+//             message: "User created successfully",
+//             result,
+//             token
+//         })
+//         next()
+//     } catch (error) {
+//         console.error(error)
+//         res.status(500).json({ error: error.message })
+//     }
+// })
 
 app.post("/login", async (req, res) => {
     const { email, password } = req.body

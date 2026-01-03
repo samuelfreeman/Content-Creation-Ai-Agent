@@ -1,0 +1,25 @@
+import z from 'zod';
+export const createUserSchema = z.object({
+    body: z.object({
+        fullname: z.string({
+            required_error: 'Fullname is required',
+        }).min(3, 'Fullname must be at least 3 characters long'),
+        email: z.string({
+            required_error: 'Email is required',
+        }).email('Invalid email address'),
+        password: z.string({
+            required_error: 'Password is required',
+        }).min(6, 'Password must be at least 6 characters long'),
+    }),
+});
+export const loginUserSchema = z.object({
+    body: z.object({
+        email: z.string({
+            required_error: 'Email is required',
+        }).email('Invalid email address'),
+        password: z.string({
+            required_error: 'Password is required',
+        }),
+    }),
+});
+//# sourceMappingURL=user.validation.js.map
