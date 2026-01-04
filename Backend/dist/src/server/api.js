@@ -3,11 +3,13 @@ import cors from "cors";
 import { handleUserTask } from "../agent/taskAgent.js";
 import bycrpt from "bcrypt";
 import { PrismaClient } from "../generated/prisma/client.js";
-const app = express();
 import { PrismaMariaDb } from '@prisma/adapter-mariadb';
 import jwt from "jsonwebtoken";
+
+const app = express();
 const adapter = new PrismaMariaDb(process.env.DATABASE_URL);
 const prisma = new PrismaClient({ adapter });
+
 app.use(cors());
 app.use(express.json());
 app.post("/agent", async (req, res, next) => {
