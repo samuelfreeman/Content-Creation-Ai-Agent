@@ -1,9 +1,6 @@
 import bycrpt from "bcrypt";
-import { PrismaClient } from "../../generated/prisma/client.js";
-import { PrismaMariaDb } from '@prisma/adapter-mariadb';
 import jwt from "jsonwebtoken";
-const adapter = new PrismaMariaDb(process.env.DATABASE_URL);
-const prisma = new PrismaClient({ adapter });
+import { prisma } from "../../utils/prismaUtil.js";
 export const signup = async (req, res, next) => {
     const data = req.body;
     const hashedPassword = await bycrpt.hash(data.password, 15);

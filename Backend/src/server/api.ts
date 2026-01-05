@@ -1,32 +1,23 @@
 import express from "express";
 import cors from "cors";
-import { handleUserTask } from "../agent/taskAgent.js";
-import bycrpt from "bcrypt"
-import { PrismaClient } from "../generated/prisma/client.js";
 const app = express();
-import { PrismaMariaDb } from '@prisma/adapter-mariadb'
-import jwt from "jsonwebtoken"
 import userRouter from "./routes/User.routes.js";
+import agentRouter from "./routes/Agent.route.js";
+import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
+dotenv.config();
 
-const adapter = new PrismaMariaDb(process.env.DATABASE_URL);
-const prisma = new PrismaClient({ adapter })
-
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+}));
+app.use(cookieParser())
 app.use(express.json());
-
-app.post("/agent", async (req, res, next) => {
-    const { task, content, value } = req.body;
-    try {
-        const result = await handleUserTask(task, content, value);
-        console.log(result)
-        res.send(result);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
-
+app.use(express.urlencoded({ extended: true }));
 
 app.use(userRouter)
+app.use(agentRouter)
 
 // app.use((error:any,req:any,res:any,next:any)=>{
 //    console.log(error)
