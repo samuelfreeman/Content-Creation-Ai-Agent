@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
 import axios, { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
 import { FaRegEye,FaRegEyeSlash } from "react-icons/fa6";
 
 
@@ -13,6 +14,7 @@ export default function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [hidden, setHidden] = useState(true);
+  const router = useRouter();
 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -31,6 +33,7 @@ export default function SignUpPage() {
 
       console.log(res.data);
       alert("Account created successfully");
+       router.push("/generate");
     } catch (err) {
       const axiosError = err as AxiosError;
       console.error(axiosError.response?.data);
@@ -93,21 +96,24 @@ export default function SignUpPage() {
                   required
                 />
                 <button 
+                type="button"
                 className="absolute translate-y-3/4 -translate-x-12"
                 onClick={() => setHidden(!hidden)}>
                   {hidden ?
                 <FaRegEyeSlash size={16} color="black" /> :
                 <FaRegEye size={16} color="black" />}
                 </button>
-             </div>
+                 {password.length > 0 && password.length < 6 && (
+                    <p className="text-red-500 p-2 text-sm">Password must be at least 6 characters</p>
+                  )}
+           </div>
           </div>
-
-          <button 
-            type="submit"
-            className="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors mt-2 shadow-md"
-          >
-            Get Started
-          </button>
+            <button 
+              type="submit"
+              className="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors mt-2 shadow-md"
+            >
+              Get Started
+            </button>
         </form>
 
         <p className="text-center mt-6 text-gray-600 text-sm">
