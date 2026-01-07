@@ -58,9 +58,9 @@ export default function SplashScreen() {
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 0.5 }}
         >
-          <Link href="/generate">
+          <Link href="/idea">
             <button className="mt-10 px-6 py-3 text-white rounded-full bg-gray-900 hover:bg-gray-700 transition-all duration-200 text-lg font-medium shadow-lg">
-              Generate a Content
+              Generate a Content Idea
             </button>
           </Link>
         </motion.div>

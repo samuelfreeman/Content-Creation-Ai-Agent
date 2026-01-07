@@ -103,7 +103,7 @@ export default function SignUpPage() {
                 <FaRegEyeSlash size={16} color="black" /> :
                 <FaRegEye size={16} color="black" />}
                 </button>
-                 {password.length > 0 && password.length < 6 && (
+                 {password.length > 0 && password.length < 8 && (
                     <p className="text-red-500 p-2 text-sm">Password must be at least 6 characters</p>
                   )}
            </div>
